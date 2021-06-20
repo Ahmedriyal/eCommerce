@@ -233,3 +233,34 @@ nav{
     cursor: pointer;
     color: #f2aa4cff;
 }
+
+#cart-total{
+	text-align: center;
+	color:#fff;
+	background-color: red;
+	width: 20px;
+	border-radius: 50%;
+	font-size: 14px;
+	position: relative;
+    top: -10px;
+    left: -10px;
+}
+
+/* .burger{
+    display: none;
+    position: absolute;
+    cursor: pointer;
+    right: 5%;
+    top: 15px;
+    margin-left: 15px;
+}
+
+.line{
+    width: 30px;
+    background-color: black;
+    margin: 5px 3px;
+    height: 3px;
+} */
+
+/* responsive */
+

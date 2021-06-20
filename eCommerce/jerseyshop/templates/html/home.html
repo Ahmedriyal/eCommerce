@@ -4,72 +4,52 @@
 {% block content %}
 
   <!-- ----- Body | Image Slider ----- -->
-  <div id="slider">
-    <figure>
-      <img src="{% static 'img/argbg.jpg' %}">
-      <img src="{% static 'img/juv.jpg' %}">
-      <img src="{% static 'img/mad.jpg' %}">
-      <img src="{% static 'img/juv.jpg' %}">
-      <img src="{% static 'img/argbg.jpg' %}">
-    </figure>
-  </div>
+<div id="slider">
+  <figure>
+    <img src="{% static 'img/argbg.jpg' %}">
+    <img src="{% static 'img/juv.jpg' %}">
+    <img src="{% static 'img/mad.jpg' %}">
+    <img src="{% static 'img/juv.jpg' %}">
+    <img src="{% static 'img/argbg.jpg' %}">
+  </figure>
+</div>
 
 
-  <!-- ----- Club Jerseys ----- -->
-  <div class="small-container">
-    <h2 class="title">Club Jerseys</h2>
-      <div class="row">
-        <div class="col-4">
-          <img src="{% static 'img/CityCon.jpg' %}" alt="">
-          <h4>Manchester City Concept Kit</h4>
-          <p>Tk. 740</p>
-        </div>
-        <div class="col-4">
-          <img src="{% static 'img/bayern.jpg' %}" alt="">
-          <h4>FC Bayern Munchen Away Kit 2021/22</h4>
-          <p>Tk. 850</p>
-        </div>
-        <div class="col-4">
-          <img src="{% static 'img/MadConcept.jpg' %}" alt="">
-          <h4>Real Madrid Concept Kit</h4>
-          <p>Tk. 740</p>
-        </div>
-        <div class="col-4">
-          <img src="{% static 'img/Dortmund110.jpg' %}" alt="">
-          <h4>Borussia Dortmund Anniversary Kit </h4>
-          <p>Tk. 740</p>
-        </div>
-      </div>
-      <div class="btn"><a class="forward" href="../html/products.html">See all</a></div>
+<!-- ----- Club Jerseys ----- -->
+<div class="small-container">
+  <h2 class="title">Club Jerseys</h2>
+  <div class="row">
+    {% for jersey in jerseys %}
+    <div class="col-4">
+      <img src="{{jersey.image.url}}" alt="">
+      <h4>{{jersey.title}}</h4>
+      <p>{{jersey.price}}</p>
+      {% if jersey.availability == False %}
+      <p class="stock">Out of Stock</p>
+      {% endif %}
+    </div>
+    {% endfor %}
   </div>
+  <div class="btn"><a class="forward" href="{% url 'club' %}">See more</a></div>
+</div>
 
-  <!-- ----- National Team Jerseys ----- -->
-  <div class="small-container">
-    <h2 class="title">National Team Jerseys</h2>
-      <div class="row">
-        <div class="col-4">
-          <img src="{% static 'img/arg1.jpg' %}" alt="">
-          <h4>Argentina Training Kit 2021</h4>
-          <p>Tk. 740</p>
-        </div>
-        <div class="col-4">
-          <img src="{% static 'img/ItalyHome.jpg' %}" alt="">
-          <h4>Italy Home Kit 2020 Euro</h4>
-          <p>Tk. 740</p>
-        </div>
-        <div class="col-4">
-          <img src="{% static 'img/arg.jpg' %}" alt="">
-          <h4>Argentina Home Kit 2021 Copa America</h4>
-          <p>Tk. 850</p>
-        </div>
-        <div class="col-4">
-          <img src="{% static 'img/ItalyAway.jpg' %}" alt="">
-          <h4>Italy Away Kit 2020 Euro</h4>
-          <p>Tk. 740</p>
-        </div>
-      </div>
-      <div class="btn"><a class="forward" href="../html/products.html">See all</a></div>
+<!-- ----- National Team Jerseys ----- -->
+<div class="small-container">
+  <h2 class="title">National Team Jerseys</h2>
+  <div class="row">
+    {% for jersey in NTjerseys %}
+    <div class="col-4">
+      <img src="{{jersey.image.url}}" alt="">
+      <h4>{{jersey.title}}</h4>
+      <p>{{jersey.price}}</p>
+      {% if jersey.availability == False %}
+      <p class="stock">Out of Stock</p>
+      {% endif %}
+    </div>
+    {% endfor %}
   </div>
+  <div class="btn"><a class="forward" href="../html/products.html">See more</a></div>
+</div>
 
 {% endblock %}
 
