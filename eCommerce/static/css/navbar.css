@@ -60,10 +60,11 @@
 	background: #101820FF;
 	z-index: 1;
 	cursor: pointer;
+	border: none;
 }
 
 .search_wrap .search_box .btn-3:hover{
-	background: #708bd2;
+	background: #616161;
 }
 
 .search_wrap .search_box .btn-3.btn_common .fas{

@@ -2,12 +2,13 @@
   <!-- ----- Search Box ----- -->
   <div class="search-container">
     <div class="search_wrap search_wrap_1">
-      <div class="search_box">
-        <input type="text" class="input" placeholder="search...">
-        <div class="btn-3 btn_common">
+      <form class="search_box" method="GET" action="{% url 'search_results' %}">
+        {% csrf_token %}
+        <input type="text" class="input" placeholder="search..." name="searched">
+        <button class="btn-3 btn_common" type="submit">
           <i class="fas fa-search"></i>
-        </div>
-      </div>
+        </button>
+      </form>
     </div>
     <div class="btn-4">
       <a class="signIn" href="#"><i class="fas fa-sign-in-alt"></i>Sign In</a>

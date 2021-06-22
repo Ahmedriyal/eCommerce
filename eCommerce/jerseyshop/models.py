@@ -6,15 +6,13 @@ class ClubJerseyDetails(models.Model):
     title = models.CharField(max_length=150)
     price = models.CharField(max_length=50)
     image = models.ImageField(upload_to='img/', null=True, blank=True)
-
-    # In_Stock = 'In Stock'
-    # Out_of_Stock = 'Out of Stock'
-    # choices = [
-    #     (In_Stock, 'In Stock'),
-    #     (Out_of_Stock, 'Out of Stock'),
-    # ]
-    # availabilty = models.CharField(max_length=50, choices=choices)
-    description = models.CharField(max_length=500)
+    small_image1 = models.ImageField(upload_to='img/', null=True, blank=True)
+    small_image2 = models.ImageField(upload_to='img/', null=True, blank=True)
+    small_image3 = models.ImageField(upload_to='img/', null=True, blank=True)
+    small_image4 = models.ImageField(upload_to='img/', null=True, blank=True)
+    authenticity = models.CharField(max_length=50, null=True, blank=True)
+    team_badge = models.CharField(max_length=50, null=True, blank=True)
+    description = models.CharField(max_length=500, null=True, blank=True)
     availability = models.BooleanField(default=True)
 
     def __str__(self):
@@ -25,8 +23,15 @@ class NTJerseyDetails(models.Model):
     title = models.CharField(max_length=150)
     price = models.CharField(max_length=50)
     image = models.ImageField(upload_to='img/', null=True, blank=True)
+    small_image1 = models.ImageField(upload_to='img/', null=True, blank=True)
+    small_image2 = models.ImageField(upload_to='img/', null=True, blank=True)
+    small_image3 = models.ImageField(upload_to='img/', null=True, blank=True)
+    small_image4 = models.ImageField(upload_to='img/', null=True, blank=True)
+    authenticity = models.CharField(max_length=50, null=True, blank=True)
+    team_badge = models.CharField(max_length=50, null=True, blank=True)
+    description = models.CharField(max_length=500, null=True, blank=True)
     availability = models.BooleanField(default=True)
-    description = models.CharField(max_length=500)
+
 
 
     def __str__(self):

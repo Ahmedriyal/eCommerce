@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <link rel="stylesheet" href="{% static 'css/club.css' %}">
+    <link rel="stylesheet" href="{% static 'css/search_results.css' %}">
+    <link rel="stylesheet" href="{% static 'css/details.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
@@ -21,6 +23,10 @@
     {% endblock %}
 
     {% include 'html/footer.html' %}
+
+    {% load static %}
+    <script src="{% static 'js/productsdetails.js' %}"></script>
+    <script src="{% static 'js/sizechart.js' %}"></script>
 
 </body>
 </html>

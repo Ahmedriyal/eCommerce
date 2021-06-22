@@ -1,0 +1,39 @@
+{% extends 'html/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="small-container">
+    {% if searched %}
+    <h1 class="result-title">Search Results:</h1>
+    <div class="row">
+        <!-- ----- Search result for Club Jerseys ----- -->
+        {% for jersey in page_obj %}
+        <div class="col-4">
+            <img src="{{jersey.image.url}}" alt="">
+            <h4>{{jersey.title}}</h4>
+            <p>{{jersey.price}}</p>
+            {% if jersey.availability == False %}
+            <p class="stock">Out of Stock</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+<!-- ----- Search result for National Team Jerseys ----- -->
+        {% for jersey in page_obj1 %}
+        <div class="col-4">
+            <img src="{{jersey.image.url}}" alt="">
+            <h4>{{jersey.title}}</h4>
+            <p>{{jersey.price}}</p>
+            {% if jersey.availability == False %}
+            <p class="stock">Out of Stock</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <h1>No items found</h1>
+    {% endif %}
+</div>
+
+{% endblock %}
