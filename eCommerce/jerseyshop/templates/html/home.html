@@ -3,7 +3,7 @@
 
 {% block content %}
 
-  <!-- ----- Body | Image Slider ----- -->
+<!-- ----- Body | Image Slider ----- -->
 <div id="slider">
   <figure>
     <img src="{% static 'img/argbg.jpg' %}">
@@ -21,7 +21,9 @@
   <div class="row">
     {% for jersey in jerseys %}
     <div class="col-4">
-      <img src="{{jersey.image.url}}" alt="">
+      <a href="{% url 'club_jersey_details' jersey.id %}">
+        <img src="{{jersey.image.url}}" alt="">
+      </a>
       <h4>{{jersey.title}}</h4>
       <p>{{jersey.price}}</p>
       {% if jersey.availability == False %}
@@ -39,7 +41,9 @@
   <div class="row">
     {% for jersey in NTjerseys %}
     <div class="col-4">
-      <img src="{{jersey.image.url}}" alt="">
+      <a href="{% url 'national_jersey_details' jersey.id %}">
+        <img src="{{jersey.image.url}}" alt="">
+      </a>
       <h4>{{jersey.title}}</h4>
       <p>{{jersey.price}}</p>
       {% if jersey.availability == False %}

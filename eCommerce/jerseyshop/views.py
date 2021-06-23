@@ -9,14 +9,14 @@ from .filters import SearchFilter
 # Create your views here.
 
 def home(request):
-    jerseys = ClubJerseyDetails.objects.all()[:4]
-    NTjerseys = NTJerseyDetails.objects.all()[:4]
+    jerseys = ClubJerseyDetails.objects.all().order_by('-added_time')[:4]
+    NTjerseys = NTJerseyDetails.objects.all().order_by('-added_time')[:4]
 
     return render(request, 'html/home.html', {'jerseys': jerseys, 'NTjerseys': NTjerseys})
 
 
 def club(request):
-    jerseys = ClubJerseyDetails.objects.all()
+    jerseys = ClubJerseyDetails.objects.all().order_by('-added_time')
     paginator = Paginator(jerseys, 20)
 
     page_number = request.GET.get('page')
@@ -26,7 +26,7 @@ def club(request):
 
 
 def country(request):
-    NTjerseys = NTJerseyDetails.objects.all()
+    NTjerseys = NTJerseyDetails.objects.all().order_by('-added_time')
     paginator = Paginator(NTjerseys, 20)
 
     page_number = request.GET.get('page')

@@ -6,32 +6,33 @@
 
 <!-- Products Details  -->
 
-    <div class="small-container single-product">
-        <div class="row-3">
-            <div class="col-2">
-                <img src="{{jersey.image.url}}" alt="" width="100%" id="ProductImg">
+<div class="small-container single-product">
+    <div class="row-3">
+        <div class="col-2">
+            <img src="{{jersey.image.url}}" alt="" width="100%" id="ProductImg">
 
-                <div class="small-img-row">
-                    <div class="small-img-col">
-                        <img src="{{jersey.small_image1.url}}" alt="" width="100%" class="small-img">
-                    </div>
-                    <div class="small-img-col">
-                        <img src="{{jersey.small_image2.url}}" alt="" width="100%" class="small-img">
-                    </div>
-                    <div class="small-img-col">
-                        <img src="{{jersey.small_image3.url}}" alt="" width="100%" class="small-img">
-                    </div>
-                    <div class="small-img-col">
-                        <img src="{{jersey.small_image4.url}}" alt="" width="100%" class="small-img">
-                    </div>
+            <div class="small-img-row">
+                <div class="small-img-col">
+                    <img src="{{jersey.small_image1URL}}" alt="" width="100%" class="small-img">
                 </div>
-
-
+                <div class="small-img-col">
+                    <img src="{{jersey.small_image2URL}}" alt="" width="100%" class="small-img">
+                </div>
+                <div class="small-img-col">
+                    <img src="{{jersey.small_image3URL}}" alt="" width="100%" class="small-img">
+                </div>
+                <div class="small-img-col">
+                    <img src="{{jersey.small_image4URL}}" alt="" width="100%" class="small-img">
+                </div>
             </div>
-            <div class="col-2">
-                <h1 class="title-txt">{{jersey.title}}</h1>
-                <h4>{{jersey.price}}</h4>
-                <div class="size">
+        </div>
+
+        <div class="col-2">
+            <h1 class="title-txt">{{jersey.title}} <small>({{jersey.type}})</small></h1>
+            <h4>{{jersey.price}}</h4>
+            <h4 class="txt"><strong>Replica Or Authentic:</strong> {{jersey.authenticity}}</h4>
+            <h4 class="txt"><strong>Type of Team Badge:</strong> {{jersey.team_badge}}</h4>
+            <div class="size">
                 <select name="" id="">
                     <option value="">Select Size</option>
                     <option value="">S</option>
@@ -45,19 +46,17 @@
 
                     <!-- Modal content -->
                     <div class="modal-content">
-                      <span class="close">&times;</span>
-                      <img id="image" src="{% static 'img/Size_Chart2.png' %}" alt="">
+                        <span class="close">&times;</span>
+                        <img id="image" src="{% static 'img/Size_Chart2.png' %}" alt="">
                     </div>
-
-                  </div>
-
+                </div>
             </div>
 
-                <h5 class="quantity">Quantity *</h5>
-                <input type="number" value="1">
-                <a href="" class="btn-1">Add To Cart</a>
-            </div>
+            <h5 class="quantity">Quantity *</h5>
+            <input type="number" value="1">
+            <a href="" class="btn-1">Add To Cart</a>
         </div>
     </div>
+</div>
 
 {% endblock %}
