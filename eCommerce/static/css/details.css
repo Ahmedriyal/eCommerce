@@ -22,6 +22,10 @@
     padding: 0;
 }
 
+.single-product .col-2 .form-input{
+    margin-top: 30px;
+}
+
 .single-product .col-2{
     padding: 20px;
 }

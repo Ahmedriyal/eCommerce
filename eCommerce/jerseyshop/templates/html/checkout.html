@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+</head>
+<body>
+<nav class="header">
+
+    <!-- ----- Navigation Menu ----- -->
+    <div class="wrapper">
+        <div class="navbar">
+            <div><a class="logo" href="{% url 'home' %}">JerseyShop</a></div>
+            <nav>
+
+            </nav>
+            <div class="btn-cart"><a class="backward" href="{% url 'home' %}">Continue Shopping</a></div>
+        </div>
+    </div>
+</nav>
+
+<!-- ----- Cart Body ----- -->
+
+<div class="small-container">
+    <h1 class="checkout-header">Shipping Info</h1>
+    <div class="row-5">
+        <div class="col-lg-6">
+            <div class="box-element" id="form-wrapper">
+                <form id="form">
+                    <div class="form-field">
+                        <label for="name">Name</label>
+                        <input required class="form-control" type="text" name="name" placeholder="Name...">
+                    </div>
+                    <div class="form-field">
+                        <label for="email">Email</label>
+                        <input required class="form-control" type="email" name="email" placeholder="Email...">
+                    </div>
+                    <div class="form-field">
+                        <label for="mobileNo">Mobile Number</label>
+                        <input required class="form-control" type="text" name="mobileNo" placeholder="Mobile Number...">
+                    </div>
+                    <div class="form-field">
+                        <label for="address">Address</label>
+                        <input required class="form-control" type="text" name="address" placeholder="Enter details address...">
+                    </div>
+                    <input class="continue" type="submit" value="Continue">
+                </form>
+
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="box-element">
+                <h1 class="checkout-header">Order Summary</h1>
+                <div class="cart-row-1">
+                    <div style="flex:1"><img class="row-image-1" src="{% static 'img/BarcaHome.jpg' %}"></div>
+                    <div style="flex:3"><h4 class="table-content">Barcelona Home Kit 21/22(fan version)</h4></div>
+                    <div style="flex:1"><h4 class="table-content">M</h4></div>
+                    <div style="flex:1"><h4 class="table-content">Tk. 740</h4></div>
+                    <div style="flex:1"><h4 class="table-content">1</h4></div>
+                    <div style="flex:1"><h4 class="table-content">Tk. 740</h4></div>
+                </div>
+                <h5 class="summary">Items:</h5>
+                <h5 class="summary">Total:</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'html/footer.html' %}
+
+</body>
+</html>

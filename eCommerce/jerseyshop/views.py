@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
-from .models import ClubJerseyDetails, NTJerseyDetails
+from .models import *
 from django.core.paginator import Paginator
 from .filters import SearchFilter
 
@@ -52,7 +52,24 @@ def national_jersey_details(request, jersey_id):
 
     return render(request, 'html/national_jersey_details.html', {'jersey': jersey})
 
+
 def club_jersey_details(request, jersey_id):
     jersey = ClubJerseyDetails.objects.get(pk=jersey_id)
 
     return render(request, 'html/club_jersey_details.html', {'jersey': jersey})
+
+
+def cart(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer)
+        items = order.orderitem_set.all()
+    else:
+        items = []
+
+    context = {'items': items}
+    return render(request, 'html/cart.html', context)
+
+
+def checkout(request):
+    return render(request, 'html/checkout.html', {})

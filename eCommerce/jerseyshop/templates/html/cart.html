@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+</head>
+<body>
+<nav class="header">
+
+    <!-- ----- Navigation Menu ----- -->
+    <div class="wrapper">
+        <div class="navbar">
+            <div><a class="logo" href="{% url 'home' %}">JerseyShop</a></div>
+            <nav>
+
+            </nav>
+            <div class="btn-cart"><a class="backward" href="{% url 'home' %}">Continue Shopping</a></div>
+        </div>
+    </div>
+</nav>
+
+<!-- ----- Cart Body ----- -->
+
+<div class="small-container">
+    <div class="cart-header">
+        Your Cart
+    </div>
+    <div class="box-element">
+        <div class="cart-box">
+            <table class="table">
+                <tr>
+                    <th><h3 class="total">Items:</h3></th>
+                    <th><h3 class="total">Total:</h3></th>
+                    <th>
+                        <a class="btn-checkout checkout" style="float:right;" href="{% url 'checkout' %}">Checkout</a>
+                    </th>
+                </tr>
+            </table>
+        </div>
+
+        <div class="cart-items">
+            <div class="cart-row">
+                <div style="flex:1"></div>
+                <div style="flex:3"><h3 class="table-header">Item</h3></div>
+                <div style="flex:1"><h3 class="table-header">Size</h3></div>
+                <div style="flex:1"><h3 class="table-header">Price</h3></div>
+                <div style="flex:1"><h3 class="table-header">Quantity</h3></div>
+                <div style="flex:1"><h3 class="table-header">Total</h3></div>
+            </div>
+
+            <div class="cart-box">
+                {% for item in items %}
+                <div class="cart-row-1">
+                    <div style="flex:1"><img class="row-image" src="{{item.club_jersey.image.url}}{{item.national_jersey.image.url}}"></div>
+                    <div style="flex:3"><h4 class="table-content">{{item.club_jersey.title}}{{item.national_jersey.title}} <small>({{item.club_jersey.type}}{{item.national_jersey.type}})</small></h4></div>
+                    <div style="flex:1"><h4 class="table-content">{{item.size}}</h4></div>
+                    <div style="flex:1"><h4 class="table-content">{{item.club_jersey.price}}{{item.national_jersey.price}}</h4></div>
+                    <div style="flex:1"><h4 class="table-content">{{item.quantity}}</h4></div>
+                    <div style="flex:1"><h4 class="table-content"></h4></div>
+                </div>
+                <button class="btn-remove"><a class="remove" href="">Remove Item</a></button>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% include 'html/footer.html' %}
+
+</body>
+</html>
+
+
+
+
+
+
