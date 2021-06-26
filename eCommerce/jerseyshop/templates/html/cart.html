@@ -37,8 +37,8 @@
         <div class="cart-box">
             <table class="table">
                 <tr>
-                    <th><h3 class="total">Items:</h3></th>
-                    <th><h3 class="total">Total:</h3></th>
+                    <th><h3 class="total">Items: {{order.get_cart_items}}</h3></th>
+                    <th><h3 class="total">Total: Tk. {{order.get_cart_total}}</h3></th>
                     <th>
                         <a class="btn-checkout checkout" style="float:right;" href="{% url 'checkout' %}">Checkout</a>
                     </th>
@@ -56,25 +56,27 @@
                 <div style="flex:1"><h3 class="table-header">Total</h3></div>
             </div>
 
+            {% for item in items %}
             <div class="cart-box">
-                {% for item in items %}
                 <div class="cart-row-1">
                     <div style="flex:1"><img class="row-image" src="{{item.club_jersey.image.url}}{{item.national_jersey.image.url}}"></div>
                     <div style="flex:3"><h4 class="table-content">{{item.club_jersey.title}}{{item.national_jersey.title}} <small>({{item.club_jersey.type}}{{item.national_jersey.type}})</small></h4></div>
                     <div style="flex:1"><h4 class="table-content">{{item.size}}</h4></div>
-                    <div style="flex:1"><h4 class="table-content">{{item.club_jersey.price}}{{item.national_jersey.price}}</h4></div>
+                    <div style="flex:1"><h4 class="table-content">Tk. {{item.club_jersey.price}}{{item.national_jersey.price}}</h4></div>
                     <div style="flex:1"><h4 class="table-content">{{item.quantity}}</h4></div>
-                    <div style="flex:1"><h4 class="table-content"></h4></div>
+                    <div style="flex:1"><h4 class="table-content"></h4>Tk. {{item.get_total}}</div>
                 </div>
-                <button class="btn-remove"><a class="remove" href="">Remove Item</a></button>
-                {% endfor %}
+                <button class="btn-remove"><a class="remove" href=""><i class="fas fa-trash-alt"></i>Remove Item</a></button>
             </div>
+            {% endfor %}
 
         </div>
     </div>
 </div>
 
 {% include 'html/footer.html' %}
+
+<script src="{% static 'js/cart.js' %}"></script>
 
 </body>
 </html>

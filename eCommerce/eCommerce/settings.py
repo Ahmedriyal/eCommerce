@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'jerseyshop',
     'django_filters',
+    'widget_tweaks',
 
 ]
 

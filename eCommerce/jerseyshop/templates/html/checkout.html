@@ -34,7 +34,8 @@
     <div class="row-5">
         <div class="col-lg-6">
             <div class="box-element" id="form-wrapper">
-                <form id="form">
+                <form action="" method="POST" enctype="multipart/form-data" id="form">
+                    {% csrf_token %}
                     <div class="form-field">
                         <label for="name">Name</label>
                         <input required class="form-control" type="text" name="name" placeholder="Name...">
@@ -59,16 +60,18 @@
         <div class="col-lg-6">
             <div class="box-element">
                 <h1 class="checkout-header">Order Summary</h1>
+                {% for item in items %}
                 <div class="cart-row-1">
-                    <div style="flex:1"><img class="row-image-1" src="{% static 'img/BarcaHome.jpg' %}"></div>
-                    <div style="flex:3"><h4 class="table-content">Barcelona Home Kit 21/22(fan version)</h4></div>
-                    <div style="flex:1"><h4 class="table-content">M</h4></div>
-                    <div style="flex:1"><h4 class="table-content">Tk. 740</h4></div>
-                    <div style="flex:1"><h4 class="table-content">1</h4></div>
-                    <div style="flex:1"><h4 class="table-content">Tk. 740</h4></div>
+                    <div style="flex:1"><img class="row-image-1" src="{{item.club_jersey.image.url}}{{item.national_jersey.image.url}}"></div>
+                    <div style="flex:3"><h4 class="table-content">{{item.club_jersey.title}}{{item.national_jersey.title}} <small>({{item.club_jersey.type}}{{item.national_jersey.type}})</small></h4></div>
+                    <div style="flex:1"><h4 class="table-content">{{item.size}}</h4></div>
+                    <div style="flex:1"><h4 class="table-content">Tk. {{item.club_jersey.price}}{{item.national_jersey.price}}</h4></div>
+                    <div style="flex:1"><h4 class="table-content">{{item.quantity}}</h4></div>
+                    <div style="flex:1"><h4 class="table-content">Tk. {{item.get_total}}</h4></div>
                 </div>
-                <h5 class="summary">Items:</h5>
-                <h5 class="summary">Total:</h5>
+                {% endfor %}
+                <h5 class="summary">Items: {{order.get_cart_items}}</h5>
+                <h5 class="summary">Total: Tk. {{order.get_cart_total}}</h5>
             </div>
         </div>
     </div>

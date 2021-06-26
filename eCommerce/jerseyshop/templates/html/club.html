@@ -14,14 +14,14 @@
     Club Jersey
   </h1>
   <div class="row">
-    {% for jersey in page_obj %}
+    {% for club_jersey in page_obj %}
     <div class="col-4">
-      <a href="{% url 'club_jersey_details' jersey.id %}">
-        <img src="{{jersey.image.url}}" alt="">
+      <a href="{% url 'club_jersey_details' club_jersey.id %}">
+        <img src="{{club_jersey.image.url}}" alt="">
       </a>
-      <h4>{{jersey.title}}  <small>({{jersey.type}})</small></h4>
-      <p>{{jersey.price}}</p>
-      {% if jersey.availability == False %}
+      <h4>{{club_jersey.title}}  <small>({{club_jersey.type}})</small></h4>
+      <p>Tk. {{club_jersey.price}}</p>
+      {% if club_jersey.availability == False %}
       <p class="stock">Out of Stock</p>
       {% endif %}
     </div>
