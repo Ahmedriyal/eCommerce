@@ -67,45 +67,88 @@ def logout(request):
 
 # /----- Views for Homepage -----/
 def home(request):
+    if request.user.is_authenticated:
+        user = request.user
+        order, created = Order.objects.get_or_create(user=user, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        cartItems= order['get_cart_items']
+
     club_jersey = ClubJerseyDetails.objects.all().order_by('-added_time')[:4]
     national_jersey = NTJerseyDetails.objects.all().order_by('-added_time')[:4]
 
-    return render(request, 'html/home.html', {'club_jersey': club_jersey, 'national_jersey': national_jersey})
+    context = {'club_jersey': club_jersey, 'national_jersey': national_jersey, 'cartItems': cartItems}
+    return render(request, 'html/home.html', context)
 
 
 # /----- Views for Club jersey page -----/
 def club(request):
+    if request.user.is_authenticated:
+        user = request.user
+        order, created = Order.objects.get_or_create(user=user, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        cartItems= order['get_cart_items']
+
     club_jersey = ClubJerseyDetails.objects.all().order_by('-added_time')
     paginator = Paginator(club_jersey, 20)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'html/club.html', {'page_obj': page_obj})
-    # return render(request, 'html/club.html', {'jerseys': jerseys})
+
+    context = {'page_obj': page_obj, 'cartItems': cartItems}
+    return render(request, 'html/club.html', context)
 
 
 # /----- Views for National jersey page -----/
 def country(request):
+    if request.user.is_authenticated:
+        user = request.user
+        order, created = Order.objects.get_or_create(user=user, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        cartItems= order['get_cart_items']
+
     national_jersey = NTJerseyDetails.objects.all().order_by('-added_time')
     paginator = Paginator(national_jersey, 20)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'html/country.html', {'page_obj': page_obj})
-    # return render(request, 'html/country.html', {'NTjerseys': NTjerseys})
+
+    context = {'page_obj': page_obj, 'cartItems': cartItems}
+    return render(request, 'html/country.html', context)
 
 
 # /----- Views for Search -----/
 def search_results(request):
+    if request.user.is_authenticated:
+        user = request.user
+        order, created = Order.objects.get_or_create(user=user, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        cartItems= order['get_cart_items']
+
     if request.method == "GET":
         searched = request.GET.get('searched')
         page_obj = ClubJerseyDetails.objects.all().filter(title__icontains=searched)
         page_obj1 = NTJerseyDetails.objects.all().filter(title__icontains=searched)
 
         return render(request, 'html/search_results.html',
-                      {'searched': searched, 'page_obj': page_obj, 'page_obj1': page_obj1})
+                      {'searched': searched, 'page_obj': page_obj, 'page_obj1': page_obj1, 'cartItems': cartItems})
     else:
-        return render(request, 'html/search_results.html', {})
+        return render(request, 'html/search_results.html', {'cartItems': cartItems})
 
 
 # /----- Views for National jersey details page -----/
@@ -116,6 +159,7 @@ def national_jersey_details(request, national_jersey_id):
         user = request.user
         order, created = Order.objects.get_or_create(user=user, complete=False)
         order.save()
+        cartItems = order.get_cart_items
 
         if request.method == 'POST':
             form = OrderItemForm(request.POST, request.FILES)
@@ -129,7 +173,8 @@ def national_jersey_details(request, national_jersey_id):
         else:
             form = OrderItemForm()
 
-    return render(request, 'html/national_jersey_details.html', {'form': form, 'national_jersey': national_jersey})
+    context = {'form': form, 'national_jersey': national_jersey, 'cartItems': cartItems}
+    return render(request, 'html/national_jersey_details.html', context)
 
 
 # /----- Views for Club jersey details page -----/
@@ -140,6 +185,7 @@ def club_jersey_details(request, club_jersey_id):
         user = request.user
         order, created = Order.objects.get_or_create(user=user, complete=False)
         order.save()
+        cartItems = order.get_cart_items
 
         if request.method == 'POST':
             form = OrderItemForm(request.POST, request.FILES)
@@ -149,11 +195,13 @@ def club_jersey_details(request, club_jersey_id):
                 orderitem.order_id = order.id
                 orderitem.save()
 
-                return redirect('cart')
+
+                # return redirect('cart')
         else:
             form = OrderItemForm()
 
-    return render(request, 'html/club_jersey_details.html', {'form': form, 'club_jersey': club_jersey})
+    context = {'form': form, 'club_jersey': club_jersey, 'cartItems': cartItems}
+    return render(request, 'html/club_jersey_details.html', context)
 
 
 # /----- Views for Cart page -----/
@@ -170,12 +218,34 @@ def cart(request):
     return render(request, 'html/cart.html', context)
 
 
+# /----- Views for Remove Item from Cart page -----/
+def delete(request, id):
+    item = OrderItem.objects.get(id=id)
+    item.delete()
+
+
+    return redirect('cart')
+
+
 # /----- Views for Checkout page -----/
 def checkout(request):
     if request.user.is_authenticated:
         user = request.user
         order, created = Order.objects.get_or_create(user=user, complete=False)
         items = order.orderitem_set.all()
+
+        if request.method == 'POST':
+            name = request.POST['name']
+            email = request.POST['email']
+            mobileNo = request.POST['mobileNo']
+            address = request.POST['address']
+
+            checkout = ShippingInfo(name=name, email=email, mobileNo=mobileNo, address=address)
+            checkout.order_id = order.id
+            checkout.user_id = user.id
+            checkout.save()
+
+
     else:
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0}
@@ -199,7 +269,6 @@ def checkout(request):
 #     orderItem.save()
 #
 #     return JsonResponse('Item is added', safe=False)
-
 
 
 

@@ -66,7 +66,7 @@
                     <div style="flex:1"><h4 class="table-content">{{item.quantity}}</h4></div>
                     <div style="flex:1"><h4 class="table-content"></h4>Tk. {{item.get_total}}</div>
                 </div>
-                <button class="btn-remove"><a class="remove" href=""><i class="fas fa-trash-alt"></i>Remove Item</a></button>
+                <button class="btn-remove"><a class="remove" href="{% url 'delete' item.id %}" onclick="return confirm('Remove item! Are you sure?')"><i class="fas fa-trash-alt"></i>Remove Item</a></button>
             </div>
             {% endfor %}
 

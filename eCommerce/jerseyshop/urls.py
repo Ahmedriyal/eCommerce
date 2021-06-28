@@ -14,8 +14,9 @@ urlpatterns = [
 	path('country/<int:national_jersey_id>/', views.national_jersey_details, name="national_jersey_details"),
 	path('club/<int:club_jersey_id>/', views.club_jersey_details, name="club_jersey_details"),
 	path('cart/', views.cart, name="cart"),
+	path('delete/<int:id>/', views.delete, name="delete"),
 	path('checkout/', views.checkout, name="checkout"),
 
-	# path('delete/<int:orderitem_id>/', views.delete, name="delete"),
+
 	# path('update_item/', views.updateItem, name="update_item"),
 ]

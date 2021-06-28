@@ -237,15 +237,22 @@ nav{
 }
 
 #cart-total{
-	text-align: center;
-	color:#fff;
+
+	height: 20px;
 	background-color: red;
-	width: 20px;
+	width: 17px;
 	border-radius: 50%;
-	font-size: 14px;
+
 	position: relative;
     top: -10px;
     left: -10px;
+}
+
+.number{
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+    margin-top: 2px;
 }
 
 /* .burger{
