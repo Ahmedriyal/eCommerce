@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 from .models import *
 from django.core.paginator import Paginator
 from django.http import JsonResponse
@@ -12,6 +13,17 @@ from .forms import OrderItemForm
 
 # /----- Views for signup -----/
 def register(request):
+    if request.user.is_authenticated:
+        user = request.user
+        order, created = Order.objects.get_or_create(user=user, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        cartItems= order['get_cart_items']
+
+
     if request.method == 'POST':
         username = request.POST['username']
         email = request.POST['email']
@@ -21,11 +33,11 @@ def register(request):
 
         if password1 == password2:
             if User.objects.filter(username=username).exists():
-                messages.info(request, "Username exist")
+                messages.error(request, "Username exist")
                 return redirect('register')
 
             elif User.objects.filter(email=email).exists():
-                messages.info(request, "This email is already used")
+                messages.error(request, "This email is already used")
                 return redirect('register')
 
             else:
@@ -33,13 +45,13 @@ def register(request):
                 user.save()
                 auth.login(request, user)
 
-                messages.info(request, "User created. Login now")
-                return redirect('login')
+                messages.info(request, "User successfully created")
+                return redirect('register')
         else:
-            messages.info(request, "Password not matching")
+            messages.error(request, "Password not matching")
             return redirect('register')
     else:
-        return render(request, 'html/register.html')
+        return render(request, 'html/register.html', {'cartItems': cartItems})
 
 
 # /----- Views for Signin -----/
@@ -54,7 +66,8 @@ def login(request):
             return redirect('/')
         else:
             messages.info(request, "Wrong username or password")
-            return redirect('login')
+            # return redirect('login')
+            # return HttpResponseRedirect('/')
     else:
         return render(request, 'html/login.html')
 

@@ -40,7 +40,11 @@
                     <th><h3 class="total">Items: {{order.get_cart_items}}</h3></th>
                     <th><h3 class="total">Total: Tk. {{order.get_cart_total}}</h3></th>
                     <th>
+                        {% if user.is_authenticated %}
                         <a class="btn-checkout checkout" style="float:right;" href="{% url 'checkout' %}">Checkout</a>
+                        {% else %}
+                        <a class="btn-checkout checkout" style="float:right;" href="{% url 'login' %}">Checkout</a>
+                        {% endif %}
                     </th>
                 </tr>
             </table>

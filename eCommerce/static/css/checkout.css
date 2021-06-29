@@ -64,3 +64,7 @@ label{
     letter-spacing: 1px;
     text-transform: uppercase;
 }
+
+.hidden{
+    display: none!important;
+}

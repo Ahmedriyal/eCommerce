@@ -52,9 +52,12 @@
                         <label for="address">Address</label>
                         <input required class="form-control" type="text" name="address" placeholder="Enter details address...">
                     </div>
-                    <input class="continue" type="submit" value="Continue">
+                    <input id="form-button" class="continue" type="submit" value="Continue">
                 </form>
-
+            </div>
+            <div class="box-element hidden" id="payment-info">
+                <small>Payment Option</small>
+                <button id="make-payment">Make Payment</button>
             </div>
         </div>
         <div class="col-lg-6">
@@ -78,6 +81,17 @@
 </div>
 
 {% include 'html/footer.html' %}
+
+<script type="text/javascript">
+    var form = document.getElementById('form')
+
+    form.addEventListener('submit', function(e){
+        e.preventDefault()
+        console.log('form submitted')
+        document.getElementById('form-button').classList.add('hidden')
+        document.getElementById('payment-info').classList.remove('hidden')
+    })
+</script>
 
 </body>
 </html>

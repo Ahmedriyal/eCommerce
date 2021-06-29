@@ -6,9 +6,13 @@
 <div class="small-container">
     <div class="signUp">
         {% if messages %}
-        <ul class="messages">
+        <ul class="messages" id="msg">
             {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% if message.tags == 'error' %}
+                    <p class="alert error"> {{message}} </p>
+                {% elif message.tags == 'info' %}
+                    <p class="alert success"> {{message}} </p>
+                {% endif %}
             {% endfor %}
         </ul>
         {% endif %}
