@@ -173,6 +173,9 @@ class OrderItem(models.Model):
     quantity = models.IntegerField(default=0)
     added_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
+    def __str__(self):
+        return str(self.order.id)
+
     @property
     def get_total(self):
         if self.club_jersey_id is not None:
@@ -192,6 +195,9 @@ class ShippingInfo(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     email = models.CharField(max_length=200, null=True, blank=True)
     address = models.CharField(max_length=300, null=True, blank=True)
-    mobileNo = models.IntegerField(default=0, null=True, blank=True)
+    mobileNo = models.CharField(max_length=100, null=True, blank=True)
     added_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.order.id)
 

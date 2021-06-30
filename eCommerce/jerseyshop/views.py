@@ -7,6 +7,7 @@ from django.core.paginator import Paginator
 from django.http import JsonResponse
 import json
 from .forms import OrderItemForm
+import datetime
 
 
 # Create your views here.
@@ -247,16 +248,16 @@ def checkout(request):
         order, created = Order.objects.get_or_create(user=user, complete=False)
         items = order.orderitem_set.all()
 
-        if request.method == 'POST':
-            name = request.POST['name']
-            email = request.POST['email']
-            mobileNo = request.POST['mobileNo']
-            address = request.POST['address']
-
-            checkout = ShippingInfo(name=name, email=email, mobileNo=mobileNo, address=address)
-            checkout.order_id = order.id
-            checkout.user_id = user.id
-            checkout.save()
+        # if request.method == 'POST':
+        #     name = request.POST['name']
+        #     email = request.POST['email']
+        #     mobileNo = request.POST['mobileNo']
+        #     address = request.POST['address']
+        #
+        #     checkout = ShippingInfo(name=name, email=email, mobileNo=mobileNo, address=address)
+        #     checkout.order_id = order.id
+        #     checkout.user_id = user.id
+        #     checkout.save()
 
 
     else:
@@ -283,5 +284,25 @@ def checkout(request):
 #
 #     return JsonResponse('Item is added', safe=False)
 
+def processOrder(request):
+    transaction_id = datetime.datetime.now().timestamp()
+    data = json.loads(request.body)
+
+    if request.user.is_authenticated:
+        user = request.user
+        order, created = Order.objects.get_or_create(user=user, complete=False)
+        total = float(data['form']['total'])
+        order.transaction_id = transaction_id
+
+        if total == float(order.get_cart_total):
+            order.complete = True
+        order.save()
+
+        ShippingInfo.objects.create(user=user, order=order, name=data['form']['name'], email=data['form']['email'],
+                                    address=data['form']['address'], mobileNo=data['form']['mobileNo'])
+    else:
+        print('User is not logged in')
+
+    return JsonResponse('Payment complete', safe=False)
 
 

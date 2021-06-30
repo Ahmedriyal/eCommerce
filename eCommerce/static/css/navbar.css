@@ -230,7 +230,7 @@ nav{
 }
 
 .cart{
-    font-size: 25px;
+    font-size: 22px;
     color: black;
 }
 
@@ -240,9 +240,9 @@ nav{
 }
 
 #cart-total{
-    height: 20px;
+    height: 17px;
 	background-color: red;
-	width: 17px;
+	width: 15px;
 	border-radius: 50%;
 	position: relative;
     top: -10px;
@@ -252,8 +252,8 @@ nav{
 .number{
     text-align: center;
     color: #fff;
-    font-size: 12px;
-    margin-top: 2px;
+    font-size: 11px;
+    margin-top: 1px;
 }
 
 /* .burger{
