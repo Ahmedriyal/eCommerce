@@ -193,3 +193,34 @@ label{
     font-weight: 500;
     font-size: 16px;
 }
+
+.img-magnifier-container {
+  position:relative;
+}
+
+.img-magnifier-glass {
+  position: absolute;
+  border: 1px solid #000;
+  border-radius: 50%;
+  cursor: none;
+  /*Set the size of the magnifier glass:*/
+  width: 200px;
+  height: 200px;
+}
+
+
+#img-container{
+	z-index: 1;
+	position: relative;
+}
+
+#lens{
+	z-index: 2;
+	position: absolute;
+    height: 125px;
+	width: 125px;
+	border:2px solid black;
+	background-repeat: no-repeat;
+	cursor: none;
+
+}

@@ -9,20 +9,22 @@
 <div class="small-container single-product">
     <div class="row-3">
         <div class="col-2">
-            <img src="{{club_jersey.image.url}}" alt="" width="100%" id="ProductImg">
-
+            <div id="img-container">
+                <div id="lens"></div>
+                <img id="featured" src="{{club_jersey.image.url}}" alt="" width="100%">
+            </div>
             <div class="small-img-row">
                 <div class="small-img-col">
-                    <img src="{{club_jersey.small_image1URL}}" alt="" width="100%" class="small-img">
+                    <img class="thumbnail active" src="{{club_jersey.small_image1URL}}" alt="" width="100%" class="small-img">
                 </div>
                 <div class="small-img-col">
-                    <img src="{{club_jersey.small_image2URL}}" alt="" width="100%" class="small-img">
+                    <img class="thumbnail" src="{{club_jersey.small_image2URL}}" alt="" width="100%" class="small-img">
                 </div>
                 <div class="small-img-col">
-                    <img src="{{club_jersey.small_image3URL}}" alt="" width="100%" class="small-img">
+                    <img class="thumbnail" src="{{club_jersey.small_image3URL}}" alt="" width="100%" class="small-img">
                 </div>
                 <div class="small-img-col">
-                    <img src="{{club_jersey.small_image4URL}}" alt="" width="100%" class="small-img">
+                    <img class="thumbnail" src="{{club_jersey.small_image4URL}}" alt="" width="100%" class="small-img">
                 </div>
             </div>
         </div>
